@@ -38,6 +38,47 @@
         </div>`
     },
     {
+      module: "开场", color: "#65e3ca", kicker: "开场小游戏", title: "你现在的 AI 使用水平在哪一级？",
+      body: `
+        <div class="level-test">
+          <div class="level-instruction reveal" style="--i:0">
+            <span>玩法</span>
+            <strong>选择你已经能够稳定做到的最高一级</strong>
+            <p>偶尔尝试过一次不算；不比较、不焦虑，只为找到下一步。</p>
+          </div>
+          <div class="level-grid" role="group" aria-label="AI 使用水平自测">
+            <button class="level-choice reveal" style="--i:1" type="button" data-level="0"><b>Lv.0</b><strong>旁观者</strong><span>只听说过</span></button>
+            <button class="level-choice reveal" style="--i:2" type="button" data-level="1"><b>Lv.1</b><strong>尝鲜者</strong><span>一问一答</span></button>
+            <button class="level-choice reveal" style="--i:3" type="button" data-level="2"><b>Lv.2</b><strong>对话者</strong><span>会追问、补背景</span></button>
+            <button class="level-choice reveal" style="--i:4" type="button" data-level="3"><b>Lv.3</b><strong>驯化师</strong><span>会约束与核验</span></button>
+            <button class="level-choice reveal" style="--i:5" type="button" data-level="4"><b>Lv.4</b><strong>越境者</strong><span>跨专业做事情</span></button>
+            <button class="level-choice reveal" style="--i:6" type="button" data-level="5"><b>Lv.5</b><strong>织网者</strong><span>有项目和流程</span></button>
+            <button class="level-choice reveal" style="--i:7" type="button" data-level="6"><b>Lv.6</b><strong>召唤师</strong><span>用 Agent 执行</span></button>
+            <button class="level-choice reveal" style="--i:8" type="button" data-level="7"><b>Lv.7</b><strong>铸造师</strong><span>会封装 Skill</span></button>
+            <button class="level-choice reveal" style="--i:9" type="button" data-level="8"><b>Lv.8</b><strong>造物主</strong><span>搭自己的系统</span></button>
+            <button class="level-choice reveal" style="--i:10" type="button" data-level="9"><b>Lv.9</b><strong>觉醒者</strong><span>人机原生协作</span></button>
+            <button class="level-choice reveal" style="--i:11" type="button" data-level="10"><b>Lv.10</b><strong>一人军团</strong><span>放大个人判断力</span></button>
+          </div>
+          <div class="level-result reveal" id="levelResult" style="--i:12" aria-live="polite">
+            <span>你的答案</span>
+            <strong>先凭直觉选一级</strong>
+            <p>今天不追求升级很多，只要找到一个能稳定向前的动作。</p>
+            ${source("卡兹克《所有人用 AI 的水平分成了 10 个等级》", "https://mp.weixin.qq.com/s/GhTOhZO_zj8NfR1vPmPVww")}
+          </div>
+        </div>`
+    },
+    {
+      module: "开场", color: "#65e3ca", kicker: "先听懂一个昵称", title: "为什么大家把桌面 Agent 叫“小龙虾”？",
+      body: `
+        <div class="lobster-origin">
+          <div class="origin-card reveal" style="--i:0"><b>01</b><span>名字从哪来</span><h2>OpenClaw 的中文社区昵称</h2><p>Claw 是“爪、钳”的意思，加上红色龙虾形象，大家便把这类 Agent 亲切地叫作“龙虾”或“小龙虾”。</p></div>
+          <div class="origin-card reveal" style="--i:1"><b>02</b><span>它不是什么</span><h2>不是一个统一的产品名称</h2><p>OpenClaw 是具体的开源项目；WorkBuddy 是腾讯推出的桌面 Agent 工作台。两者不能直接画等号。</p></div>
+          <div class="origin-card accent reveal" style="--i:2"><b>03</b><span>今天怎么理解</span><h2>会伸出“钳子”干活的 AI</h2><p>它不仅回答问题，还能读取资料、规划步骤、调用工具、操作文件，并交付可以检查的成果。</p></div>
+        </div>
+        <div class="lobster-definition reveal" style="--i:3"><span>听懂目标</span><i>→</i><span>规划步骤</span><i>→</i><span>动手执行</span><i>→</i><span>交付成果</span><strong>这就是本次分享所说的“小龙虾”能力</strong></div>
+        <div class="origin-sources reveal" style="--i:4">${source("OpenClaw 中文社区称呼说明", "https://openclawlaunch.com/zh/longxia-ai")}${source("WorkBuddy 官方产品介绍", "https://www.codebuddy.cn/docs/workbuddy/Overview")}</div>`
+    },
+    {
       module: "开场", color: "#65e3ca", kicker: "本次分享", title: "今天只解决四个问题",
       body: `
         <div class="outcome-grid compact-outcomes">
@@ -301,6 +342,33 @@
   const pageLabel = q("#pageLabel");
   const fullscreenButton = q("#fullscreenButton");
   q("#jumpTotal").textContent = `/ ${total}`;
+  q("#thumbCount").textContent = `${total} 页`;
+  pageLabel.textContent = `01 / ${String(total).padStart(2, "0")}`;
+
+  const levelGuidance = [
+    ["Lv.0 旁观者", "下一步：打开任意一个 AI 工具，完成你的第一次真实提问。"],
+    ["Lv.1 尝鲜者", "下一步：结果不满意时别关掉，补充背景并追问一次。"],
+    ["Lv.2 对话者", "下一步：加入参考资料、限制条件和明确的输出格式。"],
+    ["Lv.3 驯化师", "下一步：选一个专业以外的小任务，借助 AI 跨出边界。"],
+    ["Lv.4 越境者", "下一步：为高频任务建立固定项目、模板和资料入口。"],
+    ["Lv.5 织网者", "下一步：从聊天工具跨到 Agent，让它连续完成多步任务。"],
+    ["Lv.6 召唤师", "下一步：把一套反复使用的方法封装成自己的 Skill。"],
+    ["Lv.7 铸造师", "下一步：加入检查与反馈循环，让一次成功可以持续复用。"],
+    ["Lv.8 造物主", "下一步：连接资料、工具和工作流，形成稳定的个人 AI 系统。"],
+    ["Lv.9 觉醒者", "下一步：沉淀自己的判断标准，并帮助团队改变协作方式。"],
+    ["Lv.10 一人军团", "下一步：继续回答最重要的问题——你想用被放大的能力创造什么？"]
+  ];
+
+  qa(".level-choice").forEach((button) => {
+    button.addEventListener("click", () => {
+      const level = Number(button.dataset.level);
+      const [title, guidance] = levelGuidance[level];
+      qa(".level-choice").forEach((node) => node.classList.toggle("selected", node === button));
+      const result = q("#levelResult");
+      q("strong", result).textContent = title;
+      q("p", result).textContent = guidance;
+    });
+  });
 
   function go(index, pushHash = true) {
     current = Math.max(0, Math.min(total - 1, index));
