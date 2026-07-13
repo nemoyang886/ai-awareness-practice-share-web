@@ -1353,6 +1353,72 @@ figcaption{
   }
 }
 
+/* Fill the projection canvas on text-led concept slides. */
+.slide-body:has(> .outcome-grid),
+.slide-body:has(> .everyday-layout),
+.slide-body:has(> .concept-map),
+.slide-body:has(> .compare-grid),
+.slide-body:has(> .three-terms){
+  display:grid;
+  grid-template-rows:minmax(0,1fr) auto;
+  gap:10px;
+}
+
+.slide-body:has(> .outcome-grid) > .outcome-grid,
+.slide-body:has(> .everyday-layout) > .everyday-layout,
+.slide-body:has(> .concept-map) > .concept-map,
+.slide-body:has(> .compare-grid) > .compare-grid,
+.slide-body:has(> .three-terms) > .three-terms{
+  height:100%;
+}
+
+.outcome-card,
+.concept-card,
+.term-block,
+.compare-panel{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+
+.outcome-card h2,
+.concept-card h2,
+.compare-panel h2{
+  margin-top:auto;
+}
+
+.term-block h2{margin-bottom:auto}
+
+.everyday-layout{
+  align-items:stretch;
+  min-height:0;
+}
+
+.everyday-lead,
+.everyday-item{
+  min-height:0;
+}
+
+.everyday-lead{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+
+.everyday-lead strong{margin-top:0}
+
+.slide-body:has(> .agent-loop) > .agent-loop{
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr);
+  height:100%;
+}
+
+.slide-body:has(> .agent-loop) .loop-row,
+.slide-body:has(> .agent-loop) .loop-step{
+  height:100%;
+  min-height:0;
+}
+
 /* Internal AI literacy share */
 .cover-deck{
   max-width:620px;
@@ -1679,100 +1745,6 @@ figcaption{
   color:var(--accent-ink);
 }
 
-.visual-explainer{
-  position:relative;
-  height:448px;
-  overflow:hidden;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#070b0c;
-}
-
-.visual-explainer>img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 64%;
-  filter:saturate(.9) contrast(1.04);
-}
-
-.visual-explainer::after{
-  content:"";
-  position:absolute;
-  inset:auto 0 0;
-  height:112px;
-  background:linear-gradient(0deg,rgba(5,10,9,.94),rgba(5,10,9,0));
-  pointer-events:none;
-}
-
-.visual-labels{
-  position:absolute;
-  left:18px;
-  right:18px;
-  bottom:15px;
-  z-index:2;
-  display:grid;
-  gap:8px;
-}
-
-.visual-labels.three{grid-template-columns:repeat(3,1fr)}
-.visual-labels.five{grid-template-columns:repeat(5,1fr)}
-
-.visual-labels span{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:46px;
-  padding:8px 12px;
-  border:1px solid rgba(205,229,222,.26);
-  border-radius:9px;
-  background:rgba(10,18,16,.78);
-  color:#dbe6e2;
-  font-size:14px;
-  font-weight:700;
-  text-align:center;
-  backdrop-filter:blur(8px);
-}
-
-.visual-labels span b{
-  margin-right:7px;
-  color:var(--accent);
-  font-size:15px;
-}
-
-.visual-labels.hierarchy span{
-  justify-content:flex-start;
-  padding-left:18px;
-}
-
-.split-visual::after{height:96px}
-
-.split-label{
-  position:absolute;
-  bottom:18px;
-  z-index:2;
-  width:calc(50% - 34px);
-  padding:12px 18px;
-  border:1px solid rgba(205,229,222,.24);
-  border-radius:9px;
-  background:rgba(10,18,16,.82);
-  backdrop-filter:blur(8px);
-}
-
-.split-label.left{left:18px}
-.split-label.right{right:18px}
-.split-label b,.split-label span{display:block}
-.split-label b{margin-bottom:4px;color:var(--accent);font-size:18px}
-.split-label span{color:#c9d6d2;font-size:13px}
-
-.visual-explainer+.lead-band{margin-top:10px}
-
-@media (max-height:760px){
-  .visual-explainer{height:390px}
-  .visual-labels span{min-height:40px;font-size:13px}
-}
-
 @media (max-height:760px){
   .cover-deck{font-size:16px}
   .speaker-chip{margin-top:18px}
@@ -1795,10 +1767,4 @@ figcaption{
   .choice-row{grid-template-columns:1fr;gap:6px;padding:15px}
   .choice-head{display:none}
   .speaker-chip{width:100%}
-  .visual-explainer{height:auto;min-height:420px}
-  .visual-labels.three,
-  .visual-labels.five{grid-template-columns:1fr 1fr}
-  .visual-labels{position:relative;left:auto;right:auto;bottom:auto;padding:10px;background:#0d1214}
-  .split-label{position:relative;bottom:auto;width:auto;margin:8px 10px}
-  .split-label.left,.split-label.right{left:auto;right:auto}
 }
