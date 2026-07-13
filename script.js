@@ -51,17 +51,11 @@
     {
       module: "开场", color: "#65e3ca", kicker: "从生活开始", title: "其实，我们早就在使用 AI",
       body: `
-        <div class="everyday-layout">
-          <div class="everyday-lead reveal" style="--i:0"><strong>AI 不是突然出现的</strong><p>过去它藏在软件背后，现在它开始直接和我们对话、理解要求并生成内容。</p></div>
-          <div class="everyday-list">
-            <div class="everyday-item reveal" style="--i:1"><b>拍照</b><span>自动对焦、夜景增强、人像优化</span></div>
-            <div class="everyday-item reveal" style="--i:2"><b>地图</b><span>路线规划、拥堵预测、到达时间</span></div>
-            <div class="everyday-item reveal" style="--i:3"><b>输入</b><span>语音转文字、翻译和纠错</span></div>
-            <div class="everyday-item reveal" style="--i:4"><b>推荐</b><span>短视频、电商和音乐内容匹配</span></div>
-            <div class="everyday-item reveal" style="--i:5"><b>客服</b><span>识别问题并给出初步答复</span></div>
-          </div>
+        <div class="visual-explainer reveal" style="--i:0">
+          <img src="images/ai-everyday.webp" alt="拍照、导航、语音、内容推荐和客服中的 AI">
+          <div class="visual-labels five"><span>拍照优化</span><span>路线规划</span><span>语音输入</span><span>内容推荐</span><span>智能客服</span></div>
         </div>
-        <div class="lead-band reveal" style="--i:6">真正的新变化：AI 正从“软件里的一项功能”，变成“可以直接交代工作的伙伴”。</div>`
+        <div class="lead-band reveal" style="--i:1">过去 AI 藏在软件背后；现在，它开始直接理解要求并生成内容。</div>`
     },
     {
       type: "section", module: "基础概念", color: "#65e3ca", kicker: "第一部分", title: "先把几个词听明白",
@@ -74,45 +68,37 @@
     {
       module: "基础概念", color: "#65e3ca", kicker: "一张图看懂", title: "AI、大模型和 AI 工具不是一回事",
       body: `
-        <div class="concept-map concept-arrow-map">
-          <div class="concept-card reveal" style="--i:0"><span class="card-number">AI</span><h2>人工智能</h2><p>一个总称：让机器能够理解、判断、预测或生成内容。</p><div class="concept-formal">像“汽车行业”</div></div>
-          <div class="concept-card reveal" style="--i:1"><span class="card-number">LLM</span><h2>大语言模型</h2><p>擅长处理语言的大脑，通过大量内容学习语言规律。</p><div class="concept-formal">像“发动机技术”</div></div>
-          <div class="concept-card reveal" style="--i:2"><span class="card-number">APP</span><h2>AI 工具</h2><p>把模型包装成普通人可以直接使用的产品和界面。</p><div class="concept-formal">像“具体的一辆车”</div></div>
+        <div class="visual-explainer reveal" style="--i:0">
+          <img src="images/ai-model-tools.webp" alt="人工智能、大语言模型与 AI 工具之间的关系">
+          <div class="visual-labels three hierarchy"><span><b>AI</b>整个能力领域</span><span><b>大模型</b>核心语言引擎</span><span><b>AI 工具</b>我们直接使用的产品</span></div>
         </div>
-        <div class="lead-band reveal" style="--i:3">我们平时打开的是 AI 工具，工具背后调用的是某一种模型。</div>`
+        <div class="lead-band reveal" style="--i:1">我们打开的是 AI 工具，工具背后调用的是一种或多种模型。</div>`
     },
     {
       module: "基础概念", color: "#65e3ca", kicker: "关键区别", title: "搜索引擎找答案，大模型组织答案",
       body: `
-        <div class="compare-grid search-compare">
-          <div class="compare-panel reveal" style="--i:0"><span class="small-label">搜索引擎</span><h2>帮你找到已有页面</h2><p>你输入关键词，它返回网页、文章和信息来源。你需要自己阅读、判断和整理。</p><div class="micro-example">“武汉明天天气”</div></div>
-          <div class="compare-middle reveal" style="--i:1">找资料<br><span>vs</span><br>做表达</div>
-          <div class="compare-panel accent reveal" style="--i:2"><span class="small-label">大模型</span><h2>根据要求生成内容</h2><p>它结合你的问题和当前上下文，组织一份新的回答、方案或草稿。</p><div class="micro-example">“根据天气帮我准备出差清单”</div></div>
+        <div class="visual-explainer split-visual reveal" style="--i:0">
+          <img src="images/search-vs-generate.webp" alt="搜索引擎查找资料与大模型生成内容的区别">
+          <div class="split-label left"><b>搜索</b><span>从已有资料中找到来源</span></div>
+          <div class="split-label right"><b>生成</b><span>结合要求组织新的答案</span></div>
         </div>
-        <div class="lead-band reveal" style="--i:3">大模型会生成看起来合理但不一定正确的内容，因此重要事实仍要回到可靠来源核验。</div>`
+        <div class="lead-band reveal" style="--i:1">生成不等于事实。重要内容仍要回到可靠来源核验。</div>`
     },
     {
       module: "基础概念", color: "#65e3ca", kicker: "三个高频词", title: "Token、提示词和上下文分别是什么",
       body: `
-        <div class="three-terms">
-          <div class="term-block reveal" style="--i:0"><h2>Token</h2><strong>AI 阅读文字时的小片段</strong><p>内容越长，AI 需要处理的片段越多。今天只需要知道这个概念，不计算费用。</p></div>
-          <div class="term-block reveal" style="--i:1"><h2>提示词</h2><strong>你交代给 AI 的任务说明</strong><p>把目标、背景、资料和交付要求说清楚，结果通常更稳定。</p></div>
-          <div class="term-block reveal" style="--i:2"><h2>上下文</h2><strong>AI 当前能看到的背景</strong><p>前面对话、上传文件和个人规则，都可能影响它这一次的回答。</p></div>
+        <div class="visual-explainer reveal" style="--i:0">
+          <img src="images/prompt-context-token.webp" alt="提示词、上下文和 Token 的视觉关系">
+          <div class="visual-labels three"><span><b>提示词</b>交代任务</span><span><b>上下文</b>提供背景</span><span><b>Token</b>读取片段</span></div>
         </div>
-        <div class="lead-band reveal" style="--i:3">好结果不只取决于模型强不强，也取决于你有没有把背景和任务交代完整。</div>`
+        <div class="lead-band reveal" style="--i:1">模型决定能力上限，任务和背景决定这一次结果是否贴合。</div>`
     },
     {
       module: "基础概念", color: "#65e3ca", kicker: "从问答到执行", title: "聊天 AI 回答问题，Agent 推进任务",
       body: `
-        <div class="agent-loop">
-          <div class="agent-core reveal" style="--i:0"><span>AGENT</span><strong>围绕一个目标持续工作</strong><p>不是多聊几轮，而是会读资料、做计划、调用工具并交付结果。</p></div>
-          <div class="loop-row compact-loop">
-            <div class="loop-step reveal" style="--i:1"><b>01</b><strong>听目标</strong><span>最后要得到什么</span></div>
-            <div class="loop-step reveal" style="--i:2"><b>02</b><strong>读资料</strong><span>有哪些背景可用</span></div>
-            <div class="loop-step reveal" style="--i:3"><b>03</b><strong>做计划</strong><span>拆成哪些步骤</span></div>
-            <div class="loop-step reveal" style="--i:4"><b>04</b><strong>去执行</strong><span>生成或操作文件</span></div>
-            <div class="loop-step reveal" style="--i:5"><b>05</b><strong>交结果</strong><span>让人检查和修改</span></div>
-          </div>
+        <div class="visual-explainer agent-visual reveal" style="--i:0">
+          <img src="images/agent-work-cycle.webp" alt="Agent 从目标到交付结果的完整工作过程">
+          <div class="visual-labels five"><span>听目标</span><span>读资料</span><span>做计划</span><span>用工具</span><span>交结果</span></div>
         </div>`
     },
     {
