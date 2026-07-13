@@ -4,6 +4,28 @@
 
   const source = (label, url) => `<a class="source-note" href="${url}" target="_blank" rel="noreferrer">资料来源：${label}</a>`;
 
+  const levelProfiles = [
+    { name: "旁观者", short: "只听说过，还没真正对话", image: "images/ai-levels/lv-0.webp", clues: ["知道 AI 这个词，但没有亲自使用", "判断主要来自新闻、短视频或别人演示", "还不知道 AI 能帮自己完成什么"], next: "打开任意一个 AI 工具，完成第一次真实提问。" },
+    { name: "尝鲜者", short: "一问一答，AI 给什么就用什么", image: "images/ai-levels/lv-1.webp", clues: ["常用“帮我写一个……”直接等答案", "很少追问，也很少补充背景", "结果好不好主要看运气"], next: "结果不满意时别关掉，补充背景并追问一次。" },
+    { name: "对话者", short: "会追问，也会补背景和例子", image: "images/ai-levels/lv-2.webp", clues: ["知道怎么问会影响回答质量", "会补充对象、场景、语气和长度", "开始在两三个工作场景固定使用"], next: "加入参考资料、限制条件和明确的输出格式。" },
+    { name: "驯化师", short: "会约束、分步骤和核验结果", image: "images/ai-levels/lv-3.webp", clues: ["会要求来源、不确定就说明、不要编造", "会给案例、规定结构并拆分任务", "能在 AI 初稿上持续迭代"], next: "选一个专业以外的小任务，借助 AI 跨出边界。" },
+    { name: "越境者", short: "开始跨专业完成原本不会的事", image: "images/ai-levels/lv-4.webp", clues: ["用 AI 做自己专业以外的小项目", "主动尝试多种工具并按场景选择", "能力边界明显扩大，但流程还没固定"], next: "为高频任务建立固定项目、模板和资料入口。" },
+    { name: "织网者", short: "建立项目、模板、知识库和流程", image: "images/ai-levels/lv-5.webp", clues: ["不同任务有不同项目和资料空间", "拥有自己的提示词模板或固定流程", "开始设计自己与 AI 的长期协作方式"], next: "从聊天工具跨到 Agent，让它连续完成多步任务。" },
+    { name: "召唤师", short: "用 Agent 读取资料并多步执行", image: "images/ai-levels/lv-6.webp", clues: ["不只聊天，开始让 Agent 操作文件和工具", "能把目标交给 Agent 连续推进", "接触 Skill、MCP 和工具调用"], next: "把一套反复使用的方法封装成自己的 Skill。" },
+    { name: "铸造师", short: "把成功经验封装成 Skill", image: "images/ai-levels/lv-7.webp", clues: ["拥有自己创建并持续使用的 Skill", "会设计产出、检查、反馈、再迭代的循环", "愿意为下一次复用投入时间"], next: "加入检查与反馈循环，让一次成功可以持续复用。" },
+    { name: "造物主", short: "连接工具，搭建自己的 AI 系统", image: "images/ai-levels/lv-8.webp", clues: ["把模型、资料、工具和流程连接起来", "能构建产品、自动化或多 Agent 协作", "AI 已经参与大多数工作环节"], next: "让系统更稳定、更少、更可维护，而不是继续堆工具。" },
+    { name: "觉醒者", short: "从构思开始就是人机协作", image: "images/ai-levels/lv-9.webp", clues: ["遇到问题先想人和 AI 如何共同完成", "创造过程从一开始就由 AI 参与", "开始影响身边人的 AI 工作方式"], next: "沉淀自己的判断标准，并帮助团队改变协作方式。" },
+    { name: "一人军团", short: "把判断力复制到多个领域", image: "images/ai-levels/lv-10.webp", clues: ["个人产出接近一支小团队", "拥有稳定的 Skill、工作流、知识和审美体系", "把执行交给系统，自己负责关键判断"], next: "继续回答最重要的问题：你想用被放大的能力创造什么？" }
+  ];
+
+  const levelCards = levelProfiles.map((profile, level) => `
+    <button class="level-choice reveal${level === 1 ? " selected" : ""}" style="--i:${level + 1}" type="button" data-level="${level}">
+      <img src="${profile.image}" alt="Lv.${level} ${profile.name}原文配图" loading="lazy">
+      <span class="level-number">Lv.${level}</span>
+      <strong>${profile.name}</strong>
+      <small>${profile.short}</small>
+    </button>`).join("");
+
   const sectionBody = (number, title, desc, steps, close) => `
     <div class="section-layout">
       <div class="section-number reveal" style="--i:0">${number}</div>
@@ -47,22 +69,13 @@
             <p>偶尔尝试过一次不算；不比较、不焦虑，只为找到下一步。</p>
           </div>
           <div class="level-grid" role="group" aria-label="AI 使用水平自测">
-            <button class="level-choice reveal" style="--i:1" type="button" data-level="0"><b>Lv.0</b><strong>旁观者</strong><span>只听说过</span></button>
-            <button class="level-choice reveal" style="--i:2" type="button" data-level="1"><b>Lv.1</b><strong>尝鲜者</strong><span>一问一答</span></button>
-            <button class="level-choice reveal" style="--i:3" type="button" data-level="2"><b>Lv.2</b><strong>对话者</strong><span>会追问、补背景</span></button>
-            <button class="level-choice reveal" style="--i:4" type="button" data-level="3"><b>Lv.3</b><strong>驯化师</strong><span>会约束与核验</span></button>
-            <button class="level-choice reveal" style="--i:5" type="button" data-level="4"><b>Lv.4</b><strong>越境者</strong><span>跨专业做事情</span></button>
-            <button class="level-choice reveal" style="--i:6" type="button" data-level="5"><b>Lv.5</b><strong>织网者</strong><span>有项目和流程</span></button>
-            <button class="level-choice reveal" style="--i:7" type="button" data-level="6"><b>Lv.6</b><strong>召唤师</strong><span>用 Agent 执行</span></button>
-            <button class="level-choice reveal" style="--i:8" type="button" data-level="7"><b>Lv.7</b><strong>铸造师</strong><span>会封装 Skill</span></button>
-            <button class="level-choice reveal" style="--i:9" type="button" data-level="8"><b>Lv.8</b><strong>造物主</strong><span>搭自己的系统</span></button>
-            <button class="level-choice reveal" style="--i:10" type="button" data-level="9"><b>Lv.9</b><strong>觉醒者</strong><span>人机原生协作</span></button>
-            <button class="level-choice reveal" style="--i:11" type="button" data-level="10"><b>Lv.10</b><strong>一人军团</strong><span>放大个人判断力</span></button>
+            ${levelCards}
           </div>
           <div class="level-result reveal" id="levelResult" style="--i:12" aria-live="polite">
             <span>你的答案</span>
-            <strong>先凭直觉选一级</strong>
-            <p>今天不追求升级很多，只要找到一个能稳定向前的动作。</p>
+            <strong data-level-title>Lv.1 尝鲜者</strong>
+            <ul data-level-clues>${levelProfiles[1].clues.map((item) => `<li>${item}</li>`).join("")}</ul>
+            <p data-level-next>下一步：${levelProfiles[1].next}</p>
             ${source("卡兹克《所有人用 AI 的水平分成了 10 个等级》", "https://mp.weixin.qq.com/s/GhTOhZO_zj8NfR1vPmPVww")}
           </div>
         </div>`
@@ -71,7 +84,7 @@
       module: "开场", color: "#65e3ca", kicker: "先听懂一个昵称", title: "为什么大家把桌面 Agent 叫“小龙虾”？",
       body: `
         <div class="lobster-origin">
-          <div class="origin-card reveal" style="--i:0"><b>01</b><span>名字从哪来</span><h2>OpenClaw 的中文社区昵称</h2><p>Claw 是“爪、钳”的意思，加上红色龙虾形象，大家便把这类 Agent 亲切地叫作“龙虾”或“小龙虾”。</p></div>
+          <div class="origin-card reveal" style="--i:0"><b>01</b><img class="origin-logo" src="images/openclaw-logo.svg" alt="OpenClaw 官方图标"><span>名字从哪来</span><h2>OpenClaw 的中文社区昵称</h2><p>Claw 是“爪、钳”的意思，加上红色龙虾形象，大家便把这类 Agent 亲切地叫作“龙虾”或“小龙虾”。</p></div>
           <div class="origin-card reveal" style="--i:1"><b>02</b><span>它不是什么</span><h2>不是一个统一的产品名称</h2><p>OpenClaw 是具体的开源项目；WorkBuddy 是腾讯推出的桌面 Agent 工作台。两者不能直接画等号。</p></div>
           <div class="origin-card accent reveal" style="--i:2"><b>03</b><span>今天怎么理解</span><h2>会伸出“钳子”干活的 AI</h2><p>它不仅回答问题，还能读取资料、规划步骤、调用工具、操作文件，并交付可以检查的成果。</p></div>
         </div>
@@ -115,12 +128,14 @@
     {
       module: "基础概念", color: "#65e3ca", kicker: "一张图看懂", title: "AI、大模型和 AI 工具不是一回事",
       body: `
-        <div class="concept-map concept-arrow-map">
-          <div class="concept-card reveal" style="--i:0"><span class="card-number">AI</span><h2>人工智能</h2><p>一个总称：让机器能够理解、判断、预测或生成内容。</p><div class="concept-formal">像“汽车行业”</div></div>
-          <div class="concept-card reveal" style="--i:1"><span class="card-number">LLM</span><h2>大语言模型</h2><p>擅长处理语言的大脑，通过大量内容学习语言规律。</p><div class="concept-formal">像“发动机技术”</div></div>
-          <div class="concept-card reveal" style="--i:2"><span class="card-number">APP</span><h2>AI 工具</h2><p>把模型包装成普通人可以直接使用的产品和界面。</p><div class="concept-formal">像“具体的一辆车”</div></div>
+        <div class="model-tool-map">
+          <div class="relationship-strip reveal" style="--i:0"><span><b>AI</b>整个人工智能领域</span><i>›</i><span><b>大模型</b>提供理解和生成能力</span><i>›</i><span><b>AI 工具</b>我们直接使用的产品</span></div>
+          <div class="ecosystem-grid">
+            <section class="ecosystem-panel reveal" style="--i:1"><header><span>MODEL</span><h2>常见大模型</h2><p>同一个工具背后，可能切换不同模型。</p></header><div class="region-group"><b>国内</b><div class="chip-cloud"><span>DeepSeek V3 / R1</span><span>通义千问 Qwen</span><span>豆包大模型</span><span>文心 ERNIE</span><span>腾讯混元</span><span>智谱 GLM</span><span>Kimi / Moonshot</span><span>MiniMax</span></div></div><div class="region-group"><b>海外</b><div class="chip-cloud"><span>OpenAI GPT / o 系列</span><span>Anthropic Claude</span><span>Google Gemini</span><span>Meta Llama</span><span>xAI Grok</span><span>Mistral</span><span>Cohere Command</span></div></div></section>
+            <section class="ecosystem-panel tools reveal" style="--i:2"><header><span>TOOLS</span><h2>常见 AI 工具</h2><p>按任务选产品，不必把每个工具都学一遍。</p></header><div class="tool-directory"><div><b>对话与搜索</b><p>豆包 · 元宝 · Kimi · 通义 · 文小言 · 秘塔 · 纳米AI · ChatGPT · Claude · Gemini · Perplexity · NotebookLM</p></div><div><b>办公与创作</b><p>WorkBuddy · WPS AI · 扣子空间 · 飞书智能伙伴 · Microsoft Copilot · Notion AI · Gamma · Canva · Genspark</p></div><div><b>编程开发</b><p>CodeBuddy · Trae · GitHub Copilot · Cursor · Windsurf · Lovable · Replit</p></div><div><b>图像与视频</b><p>即梦 · 可灵 · 通义万相 · 剪映 · Midjourney · Firefly · Runway · Sora · Pika</p></div></div></section>
+          </div>
         </div>
-        <div class="lead-band reveal" style="--i:3">我们平时打开的是 AI 工具，工具背后调用的是某一种模型。</div>`
+        <div class="lead-band reveal" style="--i:3">这是一张认识市场的地图，不是排名；产品和模型更新很快，先学会按任务判断。</div>`
     },
     {
       module: "基础概念", color: "#65e3ca", kicker: "关键区别", title: "搜索引擎找答案，大模型组织答案",
@@ -178,19 +193,11 @@
       ], "本部分带走：一张遇到不同任务时的工具选择表")
     },
     {
-      type: "practice", module: "工具选择", color: "#72a7ff", kicker: "工具一", title: "豆包：适合轻量、直接和多媒体使用",
+      type: "practice", module: "工具选择", color: "#72a7ff", kicker: "聊天与分析工具", title: "豆包与 DeepSeek：功能相近，侧重点不同",
       body: `
-        <div class="tool-showcase">
-          <figure class="tool-shot reveal" style="--i:0"><img src="images/doubao-interface.webp" alt="豆包官方网页界面"></figure>
-          <div class="tool-copy reveal" style="--i:1"><span class="tool-index">01</span><h2>把它当成随手可用的日常 AI 助手</h2><ul><li>快速问答和信息解释</li><li>写作、改写和内容灵感</li><li>图片、视频、翻译和录音转写等入口</li></ul>${source("豆包官方功能说明", "https://www.doubao.com/legal/feature_intro")}</div>
-        </div>`
-    },
-    {
-      type: "practice", module: "工具选择", color: "#72a7ff", kicker: "工具二", title: "DeepSeek：适合分析、推理和方案比较",
-      body: `
-        <div class="tool-showcase reverse">
-          <figure class="tool-shot reveal" style="--i:0"><img src="images/deepseek-home.webp" alt="DeepSeek 官方网站"></figure>
-          <div class="tool-copy reveal" style="--i:1"><span class="tool-index">02</span><h2>把它当成善于拆解问题的思考助手</h2><ul><li>复杂问题的结构化分析</li><li>多个方案的比较和取舍</li><li>逻辑梳理、代码与专业内容辅助</li></ul>${source("DeepSeek 官方网站", "https://www.deepseek.com/")}</div>
+        <div class="tool-duo">
+          <article class="duo-card reveal" style="--i:0"><figure><img src="images/doubao-interface.webp" alt="豆包官方网页界面"></figure><div><span>豆包</span><h2>更偏日常、直接和多媒体</h2><p>问答、写作、语音、图片和视频入口比较集中，适合快速开始。</p>${source("豆包官方功能说明", "https://www.doubao.com/legal/feature_intro")}</div></article>
+          <article class="duo-card reveal" style="--i:1"><figure><img src="images/deepseek-home.webp" alt="DeepSeek 官方网站"></figure><div><span>DeepSeek</span><h2>更偏分析、推理和方案比较</h2><p>适合拆解复杂问题、梳理逻辑、比较方案，也能完成普通写作问答。</p>${source("DeepSeek 官方网站", "https://www.deepseek.com/")}</div></article>
         </div>`
     },
     {
@@ -345,28 +352,15 @@
   q("#thumbCount").textContent = `${total} 页`;
   pageLabel.textContent = `01 / ${String(total).padStart(2, "0")}`;
 
-  const levelGuidance = [
-    ["Lv.0 旁观者", "下一步：打开任意一个 AI 工具，完成你的第一次真实提问。"],
-    ["Lv.1 尝鲜者", "下一步：结果不满意时别关掉，补充背景并追问一次。"],
-    ["Lv.2 对话者", "下一步：加入参考资料、限制条件和明确的输出格式。"],
-    ["Lv.3 驯化师", "下一步：选一个专业以外的小任务，借助 AI 跨出边界。"],
-    ["Lv.4 越境者", "下一步：为高频任务建立固定项目、模板和资料入口。"],
-    ["Lv.5 织网者", "下一步：从聊天工具跨到 Agent，让它连续完成多步任务。"],
-    ["Lv.6 召唤师", "下一步：把一套反复使用的方法封装成自己的 Skill。"],
-    ["Lv.7 铸造师", "下一步：加入检查与反馈循环，让一次成功可以持续复用。"],
-    ["Lv.8 造物主", "下一步：连接资料、工具和工作流，形成稳定的个人 AI 系统。"],
-    ["Lv.9 觉醒者", "下一步：沉淀自己的判断标准，并帮助团队改变协作方式。"],
-    ["Lv.10 一人军团", "下一步：继续回答最重要的问题——你想用被放大的能力创造什么？"]
-  ];
-
   qa(".level-choice").forEach((button) => {
     button.addEventListener("click", () => {
       const level = Number(button.dataset.level);
-      const [title, guidance] = levelGuidance[level];
+      const profile = levelProfiles[level];
       qa(".level-choice").forEach((node) => node.classList.toggle("selected", node === button));
       const result = q("#levelResult");
-      q("strong", result).textContent = title;
-      q("p", result).textContent = guidance;
+      q("[data-level-title]", result).textContent = `Lv.${level} ${profile.name}`;
+      q("[data-level-clues]", result).innerHTML = profile.clues.map((item) => `<li>${item}</li>`).join("");
+      q("[data-level-next]", result).textContent = `下一步：${profile.next}`;
     });
   });
 
